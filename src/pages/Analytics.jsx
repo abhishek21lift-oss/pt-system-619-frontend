@@ -89,7 +89,7 @@ export default function Analytics(){
       ].map((s,i)=>(
         <Card key={i} style={{padding:16}}>
           <p style={{color:T.textDim,fontSize:10,letterSpacing:1,textTransform:"uppercase",margin:"0 0 8px"}}>{s.l}</p>
-          <p style={{color:s.c,fontSize:22,fontWeight:800,margin:0,fontFamily:"'Syne',sans-serif"}}>{s.v}</p>
+          <p style={{color:s.c,fontSize:22,fontWeight:800,margin:0,fontFamily:T.fontDisplay}}>{s.v}</p>
           <p style={{color:"#555",fontSize:10,margin:"4px 0 0"}}>{s.s}</p>
         </Card>
       ))}

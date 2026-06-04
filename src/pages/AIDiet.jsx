@@ -116,7 +116,7 @@ export default function AIDiet() {
                 { l: 'Fat', v: `${result.fat}`, u: 'g', c: T.green }].map((m, i) => (
                   <Card key={i} style={{ padding: 14, textAlign: 'center' }}>
                     <p style={{ color: T.textDim, fontSize: 10, margin: '0 0 6px', letterSpacing: 0.5 }}>{m.l}</p>
-                    <p style={{ color: m.c, fontSize: 24, fontWeight: 800, margin: 0, fontFamily: "'Syne',sans-serif" }}>{m.v}</p>
+                    <p style={{ color: m.c, fontSize: 24, fontWeight: 800, margin: 0, fontFamily: T.fontDisplay }}>{m.v}</p>
                     <p style={{ color: '#555', fontSize: 11, margin: '2px 0 0' }}>{m.u}</p>
                   </Card>
                 ))}

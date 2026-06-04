@@ -96,7 +96,7 @@ export default function AIWorkout() {
           </div>}
           {result && <div>
             <Card style={{ padding: 20, marginBottom: 14 }}>
-              <h2 style={{ color: T.text, fontSize: 18, fontWeight: 800, margin: '0 0 6px', fontFamily: "'Syne',sans-serif" }}>{result.program_name}</h2>
+              <h2 style={{ color: T.text, fontSize: 18, fontWeight: 800, margin: '0 0 6px', fontFamily: T.fontDisplay }}>{result.program_name}</h2>
               <p style={{ color: T.textDim, fontSize: 12, margin: 0, lineHeight: 1.7 }}>{result.overview}</p>
             </Card>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(272px,1fr))', gap: 12, marginBottom: 12 }}>

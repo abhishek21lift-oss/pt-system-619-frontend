@@ -58,7 +58,7 @@ export default function PowerliftingView(){
           ].map((s,j)=>(
             <div key={j} style={{background:`${s.col}0e`,border:`1px solid ${s.col}22`,borderRadius:10,padding:12,textAlign:"center"}}>
               <p style={{color:T.textDim,fontSize:10,letterSpacing:0.5,margin:0}}>{s.l}</p>
-              <p style={{color:s.col,fontSize:19,fontWeight:800,margin:"6px 0 0",fontFamily:"'Syne',sans-serif"}}>{s.v}</p>
+              <p style={{color:s.col,fontSize:19,fontWeight:800,margin:"6px 0 0",fontFamily:T.fontDisplay}}>{s.v}</p>
             </div>
           ))}
         </div>

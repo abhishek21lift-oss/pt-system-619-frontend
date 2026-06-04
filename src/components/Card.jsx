@@ -2,12 +2,17 @@ import { T } from '../services/designTokens'
 
 export default function Card({ children, style = {}, accent, nohover }) {
   return (
-    <div className="card-hover"
-      style={{
-        background: T.surface, borderRadius: 16, border: `1px solid ${accent ? accent + '44' : T.border}`,
-        transition: 'all 0.18s', ...style,
-      }}>
-      <style>{`.card-hover:hover{background:${T.surfaceH};box-shadow:0 8px 28px rgba(0,0,0,0.35);border-color:${accent ? accent + '44' : T.border}}`}</style>
+    <div style={{
+      background: T.surface, borderRadius: T.radius, border: `1px solid ${accent ? accent + '55' : T.border}`,
+      transition: 'all 0.2s cubic-bezier(0.4,0,0.2,1)',
+      ...(nohover ? {} : {
+        boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
+      }),
+      cursor: nohover ? undefined : 'default',
+      ...style,
+    }}
+      onMouseEnter={e => { if (!nohover) { e.currentTarget.style.borderColor = accent ? accent + '77' : 'rgba(255,255,255,0.15)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)' } }}
+      onMouseLeave={e => { if (!nohover) { e.currentTarget.style.borderColor = accent ? accent + '55' : T.border; e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.3)' } }}>
       {children}
     </div>
   )
