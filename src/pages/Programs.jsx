@@ -52,7 +52,7 @@ export default function Programs(){
           </div>
           <p style={{color:"#555",fontSize:10,margin:"5px 0 0",textAlign:"right"}}>{p.progress}% complete</p>
         </Card>
-      ))}
+      })}
     </div>
     <Card style={{padding:24,textAlign:"center",cursor:"pointer"}} nohover>
       <p style={{fontSize:28,margin:"0 0 8px"}}>⊕</p>
