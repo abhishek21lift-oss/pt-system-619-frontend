@@ -2,6 +2,18 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { T } from './services/designTokens'
 import { api } from './services/api'
+import Dashboard from './pages/Dashboard'
+import Clients from './pages/Clients'
+import TrainersView from './pages/TrainersView'
+import Payments from './pages/Payments'
+import Analytics from './pages/Analytics'
+import CRM from './pages/CRM'
+import Programs from './pages/Programs'
+import PowerliftingView from './pages/PowerliftingView'
+import Attendance from './pages/Attendance'
+import AIDiet from './pages/AIDiet'
+import AIWorkout from './pages/AIWorkout'
+import Settings from './pages/Settings'
 
 const NAV = [
   { id: 'dashboard', label: 'Dashboard', icon: '◻', group: 'core' },
