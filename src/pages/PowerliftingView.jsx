@@ -1,26 +1,44 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 import { T } from '../services/designTokens'
-import { PL_CLIENTS } from '../data/seed'
+import { api } from '../services/api'
 import Card from '../components/Card'
 import KPI from '../components/KPI'
 import SH from '../components/SH'
 
 export default function PowerliftingView(){
-  const [sel,setSel]=useState(0)
-  const c=PL_CLIENTS[sel]
-  const barD=[{lift:"Squat",kg:c.squat},{lift:"Bench",kg:c.bench},{lift:"Deadlift",kg:c.deadlift},{lift:"Total",kg:c.total}]
-  const liftColors=[T.gold,T.blue,T.red,T.green]
+  const [plClients, setPlClients] = useState([])
+  const [sel, setSel] = useState(0)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    api.powerlifting.list()
+      .then(res => setPlClients(res.data))
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  if (loading) return <div style={{padding:40,color:T.textDim}}>Loading powerlifting…</div>
+  if (plClients.length === 0) return <div style={{padding:40,color:T.textDim}}>No powerlifting clients yet.</div>
+
+  const index = Math.min(sel, plClients.length - 1)
+  const c = plClients[index]
+  const barD = [{lift:"Squat",kg:c.squat},{lift:"Bench",kg:c.bench},{lift:"Deadlift",kg:c.deadlift},{lift:"Total",kg:c.total}]
+  const liftColors = [T.gold,T.blue,T.red,T.green]
+  const bestTotal = plClients.reduce((a,b)=>a.total>b.total?a:b)
+  const bestSquat = plClients.reduce((a,b)=>a.squat>b.squat?a:b)
+  const bestDL = plClients.reduce((a,b)=>a.deadlift>b.deadlift?a:b)
+
   return <div>
     <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:12,marginBottom:20}}>
-      <KPI label="PL Clients" value="3"      sub="Coached"          accent={T.gold}  icon="🏋"/>
-      <KPI label="Best Total"  value="590kg"  sub="Abhishek K."      accent={T.red}   icon="◈"/>
-      <KPI label="Best Squat"  value="220kg"  sub="Abhishek K."      accent={T.blue}  icon="◫"/>
-      <KPI label="Best DL"     value="240kg"  sub="Abhishek K."      accent={T.green} icon="◫"/>
+      <KPI label="PL Clients" value={plClients.length} sub="Coached"          accent={T.gold}  icon="🏋"/>
+      <KPI label="Best Total"  value={`${bestTotal.total}kg`}  sub={bestTotal.name}      accent={T.red}   icon="◈"/>
+      <KPI label="Best Squat"  value={`${bestSquat.squat}kg`}  sub={bestSquat.name}      accent={T.blue}  icon="◫"/>
+      <KPI label="Best DL"     value={`${bestDL.deadlift}kg`}  sub={bestDL.name}      accent={T.green} icon="◫"/>
     </div>
     <div style={{display:"flex",gap:10,marginBottom:16}}>
-      {PL_CLIENTS.map((cl,i)=>(
-        <button key={i} onClick={()=>setSel(i)} style={{
+      {plClients.map((cl,i)=>(
+        <button key={cl.id||i} onClick={()=>setSel(i)} style={{
           background:sel===i?T.goldDim:T.surface,border:`1px solid ${sel===i?T.borderA:T.border}`,
           color:sel===i?T.gold:T.textDim,borderRadius:10,padding:"9px 20px",
           fontSize:12,fontWeight:700,cursor:"pointer"}}>
